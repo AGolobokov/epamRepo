@@ -36,4 +36,3 @@ def test_negative_case_when_start_with_0_var_1():
 def test_negative_case_when_start_with_1_var_1():
     """"""
     assert not check_fibonacci([1, 1])
-

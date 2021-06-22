@@ -2,7 +2,6 @@ import pytest
 
 from homework1.other_tasks.tasks.task05 import find_maximal_subarray_sum
 
-
 nums = [1, 3, -1, -3, 5, 3, 6, 7]
 k = 3
 

@@ -19,7 +19,7 @@ def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
         ...  # do nothing
     elif k > 0:
         while copy_k != 0:
-            for i in range(0, len(nums)-copy_k + 1):
+            for i in range(0, len(nums) - copy_k + 1):
                 summ = 0
                 for j in range(0, copy_k):
                     summ += nums[j + i]

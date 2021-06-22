@@ -18,8 +18,8 @@ def check_fibonacci(data: Sequence[int]) -> bool:
 
     if list_len > 2:
         if local_list[0] == 0 or local_list[0] == 1:
-            for i in range(0, list_len-2):
-                if local_list[i+2] == local_list[i] + local_list[i+1]:
+            for i in range(0, list_len - 2):
+                if local_list[i + 2] == local_list[i] + local_list[i + 1]:
                     result_of_check = 1
                 else:
                     result_of_check = 0
