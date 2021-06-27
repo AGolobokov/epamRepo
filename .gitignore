@@ -139,4 +139,4 @@ cython_debug/
 
 # My ignore
 .git/ 
-.idea
+.idea/
