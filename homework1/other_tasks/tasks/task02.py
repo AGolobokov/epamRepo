@@ -10,21 +10,14 @@ from typing import Sequence
 
 
 def check_fibonacci(data: Sequence[int]) -> bool:
-    result_of_check = 0
-    local_list = []
-    for x in data:
-        local_list.append(x)
-    list_len = len(local_list)
+    result_of_check = False
 
-    if list_len > 2:
-        if local_list[0] == 0 or local_list[0] == 1:
-            for i in range(0, list_len - 2):
-                if local_list[i + 2] == local_list[i] + local_list[i + 1]:
-                    result_of_check = 1
-                else:
-                    result_of_check = 0
-                    break
+    list_len = len(data)
+    for i in range(0, list_len-2):
+        if data[i + 2] == data[i] + data[i + 1]:
+            result_of_check = True
         else:
-            result_of_check = 0
+            result_of_check = False
+            break
 
-    return bool(result_of_check)
+    return result_of_check

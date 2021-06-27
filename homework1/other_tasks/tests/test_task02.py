@@ -13,6 +13,11 @@ def test_positive_case_when_start_with_1():
     assert check_fibonacci([1, 1, 2, 3, 5, 8, 13, 21])
 
 
+def test_positive_case_when_start_from_non_beginning():
+    """"""
+    assert check_fibonacci([3, 5, 8, 13, 21, 34])
+
+
 def test_negative_case_no_numbers():
     """"""
     assert not check_fibonacci([])
