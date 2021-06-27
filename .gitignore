@@ -128,6 +128,18 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+<<<<<<< HEAD
 # My ignore 
 .git 
 .idea
+=======
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# My ignore
+.git/ 
+.idea/
+>>>>>>> 55404b3... Rm .idea and add .idea to gitignore
