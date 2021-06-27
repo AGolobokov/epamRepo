@@ -13,7 +13,7 @@ from typing import List
 
 
 def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
-    max_subarray = 0
+    max_subarray = nums[0]
 
     if k == 0:
         return -1
