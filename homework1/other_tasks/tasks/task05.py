@@ -14,16 +14,16 @@ from typing import List
 
 def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
     max_subarray = 0
-    copy_k = k
+
     if k == 0:
-        ...  # do nothing
+        return -1
     elif k > 0:
-        while copy_k != 0:
-            for i in range(0, len(nums) - copy_k + 1):
+        while k != 0:
+            for i in range(0, len(nums) - k + 1):
                 summ = 0
-                for j in range(0, copy_k):
+                for j in range(0, k):
                     summ += nums[j + i]
                     if max_subarray < summ:
                         max_subarray = summ
-            copy_k = copy_k - 1
+            k = k - 1
     return max_subarray
