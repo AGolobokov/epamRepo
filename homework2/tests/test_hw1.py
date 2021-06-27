@@ -42,18 +42,17 @@ def test_file_with_non_ascii() -> str:
     temp_dir = tempfile.gettempdir()
     temp_file = f'{temp_dir}/new_file.txt'
     with open(f"{temp_dir}/new_file.txt", "w") as f:
-        f.write("The Republican Party, also referred to as the GOP (Grand Old Party)\n"
-                "is one of the two major contemporary political parties in the United States,\n"
-                "along with its main historic rival, the Democratic Party.\n"
-                "В этот лес завороженный,По пушинкам серебра,\n")
+        f.write("The Republican Party, also referr\\u00dced to as the GOP (Grand Old Party)\n"
+                "is one of the two maj\\u00bbor contemporary political parties in the United States,\n"
+                "along with i\\u00dcts main histo\\u00dcric rival, the Democratic Party.\n")
     return temp_file
 
 
 def test_positive_count_non_ascii_chars(test_file_with_non_ascii):
     """Testing that test_file_with_non_ascii give 37"""
-    assert count_non_ascii_chars(test_file_with_non_ascii) == 37
+    assert count_non_ascii_chars(test_file_with_non_ascii) == 4
 
 
 def test_positive_get_most_common_non_ascii_char(test_file_with_non_ascii):
     """Testing that temp_file give 6"""
-    assert get_most_common_non_ascii_char(test_file_with_non_ascii) == 'о'
+    assert get_most_common_non_ascii_char(test_file_with_non_ascii) == '\\u00dc'

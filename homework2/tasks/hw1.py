@@ -51,9 +51,12 @@ def count_non_ascii_chars(file_path: str) -> int:
     result_counter = 0
     with open(file_path) as file:
         for line in file:
-            for char in line:
-                if ord(char) > 127 or ord(char) < 0:
-                    result_counter += 1
+            start = -1
+            while True:
+                start = line.find("\\u", start + 1)
+                if start == -1:
+                    break
+                result_counter += 1
     return result_counter
 
 
@@ -61,16 +64,21 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
     collection_non_ascii_char = dict()
     with open(file_path) as file:
         for line in file:
-            for char in line:
-                if ord(char) > 127 or ord(char) < 0:
-                    if char not in collection_non_ascii_char:
+            start = -1
+            while True:
+                index = line.find("\\u", start + 1)
+                start = line.find("\\u", start + 1)
+                if start == -1:
+                    break
+                else:
+                    if line[int(index):int(index+6)] not in collection_non_ascii_char:
                         counter_value = 0
-                        collection_non_ascii_char.update({char: counter_value})
+                        collection_non_ascii_char.update({line[int(index):int(index+6)]: counter_value})
                     else:
                         for key, value in collection_non_ascii_char.items():
-                            if key == char:
+                            if key == line[int(index):int(index+6)]:
                                 value = value + 1
-                                collection_non_ascii_char.update({char: value})
+                                collection_non_ascii_char.update({line[int(index):int(index+6)]: value})
     if bool(collection_non_ascii_char):
         max_v = max([value for value in collection_non_ascii_char.values()])
 
