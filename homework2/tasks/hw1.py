@@ -57,6 +57,9 @@ def count_non_ascii_chars(file_path: str) -> int:
                 if start == -1:
                     break
                 result_counter += 1
+            for char in line:
+                if ord(char) > 127:
+                    result_counter += 1
     return result_counter
 
 
@@ -79,6 +82,16 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
                             if key == line[int(index):int(index+6)]:
                                 value = value + 1
                                 collection_non_ascii_char.update({line[int(index):int(index+6)]: value})
+            for char in line:
+                if ord(char) > 127:
+                    if char not in collection_non_ascii_char:
+                        counter_value = 0
+                        collection_non_ascii_char.update({char: counter_value})
+                    else:
+                        for key, value in collection_non_ascii_char.items():
+                            if key == char:
+                                value = value + 1
+                                collection_non_ascii_char.update({char: value})
     if bool(collection_non_ascii_char):
         max_v = max([value for value in collection_non_ascii_char.values()])
 
