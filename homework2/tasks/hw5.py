@@ -14,15 +14,26 @@ assert = custom_range(string.ascii_lowercase, 'g', 'p') == ['g', 'h', 'i', 'j', 
 assert = custom_range(string.ascii_lowercase, 'p', 'g', -2) == ['p', 'n', 'l', 'j', 'h']
 
 """
-import string
 
-def range_function(str, start='a', stop='z', step=1):
-    set_of_vowels = list(str)
-    start = set_of_vowels.index(start)
-    stop = set_of_vowels.index(stop)
-    list_of_range = set_of_vowels[start:stop:step]
-    return list_of_range
 
-print(range_function(string.ascii_lowercase, 'g'))
+def range_function(*args):
+    args_counter = len(args)
+    temp_list = list(args[0])
+    start = 0
+    step = 1
+    if args_counter == 2:
+        stop = temp_list.index(args[1])
+    elif args_counter == 3:
+        stop = temp_list.index(args[2])
+        start = temp_list.index(args[1])
+    elif args_counter == 4:
+        stop = temp_list.index(args[2])
+        start = temp_list.index(args[1])
+        step = args[3]
+    else:
+        return -1
+
+    answer_list = temp_list[start:stop:step]
+    return answer_list
 
 
