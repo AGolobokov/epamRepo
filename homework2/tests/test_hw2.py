@@ -16,4 +16,4 @@ def test_positive_major_and_minor_elem_2():
 
 def test_positive_major_and_minor_elem_with_char():
     """Testing that temp_file with data [2,2,1,1,1,2,2] give (2, 1)"""
-    assert major_and_minor_elem(['a', 'a', 'a', 'b', 'b', 'c']) == ('a', 'c')
+    assert major_and_minor_elem(["a", "a", "a", "b", "b", "c"]) == ("a", "c")

@@ -35,5 +35,3 @@ def range_function(*args):
 
     answer_list = temp_list[start:stop:step]
     return answer_list
-
-

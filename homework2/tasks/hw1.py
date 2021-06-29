@@ -42,7 +42,12 @@ def count_punctuation_chars(file_path: str) -> int:
     with open(file_path) as file:
         for line in file:
             for char in line:
-                if 33 <= ord(char) <= 47 or 58 <= ord(char) <= 64 or 91 <= ord(char) <= 96 or 123 <= ord(char) <= 126:
+                if (
+                    33 <= ord(char) <= 47
+                    or 58 <= ord(char) <= 64
+                    or 91 <= ord(char) <= 96
+                    or 123 <= ord(char) <= 126
+                ):
                     result_counter = result_counter + 1
     return result_counter
 
@@ -74,14 +79,21 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
                 if start == -1:
                     break
                 else:
-                    if line[int(index):int(index+6)] not in collection_non_ascii_char:
+                    if (
+                        line[int(index) : int(index + 6)]
+                        not in collection_non_ascii_char
+                    ):
                         counter_value = 0
-                        collection_non_ascii_char.update({line[int(index):int(index+6)]: counter_value})
+                        collection_non_ascii_char.update(
+                            {line[int(index) : int(index + 6)]: counter_value}
+                        )
                     else:
                         for key, value in collection_non_ascii_char.items():
-                            if key == line[int(index):int(index+6)]:
+                            if key == line[int(index) : int(index + 6)]:
                                 value = value + 1
-                                collection_non_ascii_char.update({line[int(index):int(index+6)]: value})
+                                collection_non_ascii_char.update(
+                                    {line[int(index) : int(index + 6)]: value}
+                                )
             for char in line:
                 if ord(char) > 127:
                     if char not in collection_non_ascii_char:

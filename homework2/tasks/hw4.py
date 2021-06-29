@@ -34,4 +34,5 @@ def cache(func: Callable) -> Callable:
             for i in cache_list:
                 if i == func(*args):
                     return i
+
     return check_cache

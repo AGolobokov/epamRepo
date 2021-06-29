@@ -8,6 +8,7 @@ DATA_2 = 10, 20
 
 def test_positive_cache():
     """Testing that objects is equal"""
+
     def func(a, b):
         return (a ** b) ** 2
 
