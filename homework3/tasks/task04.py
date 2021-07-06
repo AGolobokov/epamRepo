@@ -32,6 +32,3 @@ def is_armstrong(number: int) -> bool:
     if sum == number:
         result = True
     return result
-
-
-
