@@ -7,7 +7,7 @@ from homework1.other_tasks.tasks.task03 import find_maximum_and_minimum
 @pytest.fixture
 def test_file() -> str:
     temp_dir = tempfile.gettempdir()
-    temp_file = f'{temp_dir}/new_file.txt'
+    temp_file = f"{temp_dir}/new_file.txt"
     with open(f"{temp_dir}/new_file.txt", "w") as f:
         f.write("12\n-2\n789\n1\n0\n78")
     return temp_file

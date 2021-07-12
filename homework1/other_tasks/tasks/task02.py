@@ -13,7 +13,7 @@ def check_fibonacci(data: Sequence[int]) -> bool:
     result_of_check = False
 
     list_len = len(data)
-    for i in range(0, list_len-2):
+    for i in range(0, list_len - 2):
         if data[i + 2] == data[i] + data[i + 1]:
             result_of_check = True
         else:

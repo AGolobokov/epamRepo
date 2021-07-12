@@ -11,19 +11,24 @@ Examples:
 """
 from typing import List
 
+nums = [1, 3, -1, -3, 5, 3, 6, 7]
+k = 0
+
 
 def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
-    max_subarray = nums[0]
+    max_subarray = -1
+    list_of_summ_subarray = list()
 
-    if k == 0:
-        return -1
-    elif k > 0:
+    if k > 0:
         while k != 0:
             for i in range(0, len(nums) - k + 1):
                 summ = 0
-                for j in range(0, k):
-                    summ += nums[j + i]
-                    if max_subarray < summ:
-                        max_subarray = summ
+                list_of_summ_subarray.append(
+                    sum([summ + nums[j + i] for j in range(0, k)])
+                )
             k = k - 1
+        max_subarray = max(list_of_summ_subarray)
     return max_subarray
+
+
+print(find_maximal_subarray_sum(nums, k))
