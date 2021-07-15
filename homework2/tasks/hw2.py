@@ -18,27 +18,8 @@ Output: 2, 1
 
 """
 from typing import List, Tuple
+from collections import Counter
 
 
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
-    temp_dict = dict()
-    for i in inp:
-        if i not in temp_dict:
-            counter_value = 0
-            temp_dict.update({i: counter_value})
-        else:
-            for key, value in temp_dict.items():
-                if key == i:
-                    value = value + 1
-                    temp_dict.update({i: value})
-    max_value = max([value for value in temp_dict.values()])
-    min_value = min([value for value in temp_dict.values()])
-
-    most_common = least_common = 0
-    for key, value in temp_dict.items():
-        if value == max_value:
-            most_common = key
-        if value == min_value:
-            least_common = key
-    answer = (most_common, least_common)
-    return answer
+    return max(Counter(inp), key=Counter(inp).get), min(Counter(inp), key=Counter(inp).get)
