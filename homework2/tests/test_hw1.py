@@ -69,4 +69,4 @@ def test_positive_count_non_ascii_chars(test_file_with_non_ascii):
 
 def test_positive_get_most_common_non_ascii_char(test_file_with_non_ascii):
     """Testing that temp_file give 6"""
-    assert get_most_common_non_ascii_char(test_file_with_non_ascii) == "\\u00dc"
+    assert get_most_common_non_ascii_char(test_file_with_non_ascii) == "Ü"

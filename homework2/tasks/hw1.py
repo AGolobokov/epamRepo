@@ -7,106 +7,66 @@ Given a file containing text. Complete using only default collections:
     5) Find most common non ascii char for document
 """
 from typing import List
+import string
+from collections import Counter
+
+
+def extract_lines_form_file(file_path: str) -> any:
+    with open(file_path) as file:
+        for line in file:
+            yield line
+
+
+def string_escape(s):
+    return s.encode().decode('unicode-escape')
 
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
-    unique_set = set()
-    with open(file_path) as file:
-        for line in file:
-            for el in line.split():
-                if el not in unique_set:
-                    unique_set.add((len(set(el)) + len(el), el))
-    return [i[1] for i in sorted(unique_set)[:-11:-1]]
+    unique_words = set()
+
+    for line in extract_lines_form_file(file_path):
+        for element in line.split():
+            if element not in unique_words:
+                unique_words.add((len(set(element)) + len(element), element))
+    # в след раз попробую уменьшить вложенность
+    return [i[1] for i in sorted(unique_words)[:-11:-1]]
 
 
 def get_rarest_char(file_path: str) -> str:
-    collection_char = dict()
-    with open(file_path) as file:
-        for line in file:
-            for char in line:
-                if char not in collection_char:
-                    counter_value = 1
-                    collection_char.update({char: counter_value})
-                else:
-                    for key, value in collection_char.items():
-                        if key == char:
-                            value += 1
-                            collection_char.update({char: value})
-    for key, value in collection_char.items():
-        if value == 1:
-            return key
+    collection_char = Counter()
+
+    for line in extract_lines_form_file(file_path):
+        temp_dict = Counter(list(string_escape(line)))
+        collection_char += temp_dict
+    if collection_char:
+        return min(collection_char, key=collection_char.get)
 
 
 def count_punctuation_chars(file_path: str) -> int:
     result_counter = 0
-    with open(file_path) as file:
-        for line in file:
-            for char in line:
-                if (
-                    33 <= ord(char) <= 47
-                    or 58 <= ord(char) <= 64
-                    or 91 <= ord(char) <= 96
-                    or 123 <= ord(char) <= 126
-                ):
-                    result_counter = result_counter + 1
+    for line in extract_lines_form_file(file_path):
+        for char in line:
+                if char in string.punctuation:
+                    result_counter += 1
     return result_counter
 
 
 def count_non_ascii_chars(file_path: str) -> int:
     result_counter = 0
-    with open(file_path) as file:
-        for line in file:
-            start = -1
-            while True:
-                start = line.find("\\u", start + 1)
-                if start == -1:
-                    break
+
+    for line in extract_lines_form_file(file_path):
+        for elm in list(string_escape(line)):
+            if not elm.isascii():
                 result_counter += 1
-            for char in line:
-                if ord(char) > 127:
-                    result_counter += 1
     return result_counter
 
 
 def get_most_common_non_ascii_char(file_path: str) -> str:
-    collection_non_ascii_char = dict()
-    with open(file_path) as file:
-        for line in file:
-            start = -1
-            while True:
-                index = line.find("\\u", start + 1)
-                start = line.find("\\u", start + 1)
-                if start == -1:
-                    break
-                else:
-                    if (
-                        line[int(index) : int(index + 6)]
-                        not in collection_non_ascii_char
-                    ):
-                        counter_value = 0
-                        collection_non_ascii_char.update(
-                            {line[int(index) : int(index + 6)]: counter_value}
-                        )
-                    else:
-                        for key, value in collection_non_ascii_char.items():
-                            if key == line[int(index) : int(index + 6)]:
-                                value = value + 1
-                                collection_non_ascii_char.update(
-                                    {line[int(index) : int(index + 6)]: value}
-                                )
-            for char in line:
-                if ord(char) > 127:
-                    if char not in collection_non_ascii_char:
-                        counter_value = 0
-                        collection_non_ascii_char.update({char: counter_value})
-                    else:
-                        for key, value in collection_non_ascii_char.items():
-                            if key == char:
-                                value = value + 1
-                                collection_non_ascii_char.update({char: value})
-    if bool(collection_non_ascii_char):
-        max_v = max([value for value in collection_non_ascii_char.values()])
+    collection_non_ascii_char = Counter()
 
-        for key, value in collection_non_ascii_char.items():
-            if value == max_v:
-                return key
+    for line in extract_lines_form_file(file_path):
+        temp_list = [elm for elm in list(string_escape(line)) if not elm.isascii()]
+        temp_dict = Counter(temp_list)
+        collection_non_ascii_char += temp_dict
+    if collection_non_ascii_char:
+        return max(collection_non_ascii_char, key=collection_non_ascii_char.get)
