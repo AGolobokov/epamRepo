@@ -14,17 +14,26 @@ assert combinations([1, 2], [3, 4]) == [
     [2, 4],
 ]
 """
+import itertools
 from typing import List, Any
 
 
+def my_list_generator(temp_list:List[Any], value)->Any:
+    for elm in itertools.combinations(temp_list, value - 1):
+        yield elm
+
+
 def combinations(*args: List[Any]) -> List[List]:
-    length = len(args)
-    answer_list = list()
+    lists_counter, first_list_size = len(args), len(args[0])
+    intermediate_list = list()
     for i in args[0]:
-        for k in args[1:length]:
-            for j in k:
-                newlist = list()
-                newlist.append(i)
-                newlist.append(j)
-                answer_list.append(newlist)
+        new_list = [item for sublist in args[1:lists_counter] for item in sublist]
+        for j in my_list_generator(new_list, first_list_size):
+            temp_list = list()
+            temp_list.append(i)
+            temp_list.extend([*j])
+            intermediate_list.append(temp_list)
+    temp_set = {tuple(el) for el in intermediate_list}
+    answer_list = [list(el) for el in temp_set]
+    answer_list.sort()
     return answer_list
