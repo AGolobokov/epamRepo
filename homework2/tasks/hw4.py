@@ -22,17 +22,12 @@ from typing import Callable
 
 
 def cache(func: Callable) -> Callable:
-    cache_list = list()
+    cache_dict = dict()
 
-    def check_cache(*args):
-        if func(*args) in cache_list:
-            for i in cache_list:
-                if i == func(*args):
-                    return i
-        elif func(*args) not in cache_list:
-            cache_list.append(func(*args))
-            for i in cache_list:
-                if i == func(*args):
-                    return i
-
-    return check_cache
+    def check_args(*args):
+        if args in cache_dict:
+            return cache_dict[args]
+        result = func(*args)
+        cache_dict[args] = result
+        return result
+    return check_args

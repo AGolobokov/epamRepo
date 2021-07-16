@@ -3,7 +3,7 @@ import pytest
 from homework2.tasks.hw4 import cache
 
 DATA_1 = 100, 200
-DATA_2 = 10, 20
+DATA_2 = 4000, 20000
 
 
 def test_positive_cache():
