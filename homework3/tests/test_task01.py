@@ -19,11 +19,3 @@ def test_positive_cache():
     assert result_of_call[0] is result_of_call[1] is result_of_call[2]
     assert result_of_call[3] is result_of_call[4] is result_of_call[5]
     assert result_of_call[0] is not result_of_call[4]
-
-
-
-
-
-
-
-

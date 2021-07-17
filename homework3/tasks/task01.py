@@ -1,5 +1,3 @@
-
-
 def cache(times):
     cache_list = list()
 
@@ -19,5 +17,7 @@ def cache(times):
                 # print(temp_value) # use for example with print
                 cache_list.remove(temp_value)
                 return temp_value
+
         return cache_wrapper
+
     return cache_decorator
