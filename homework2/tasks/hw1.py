@@ -18,7 +18,7 @@ def extract_lines_form_file(file_path: str) -> any:
 
 
 def string_escape(s):
-    return s.encode().decode('unicode-escape')
+    return s.encode().decode("unicode-escape")
 
 
 def get_longest_diverse_words(file_path: str) -> List[str]:

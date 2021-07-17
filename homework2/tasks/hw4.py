@@ -30,4 +30,5 @@ def cache(func: Callable) -> Callable:
         result = func(*args)
         cache_dict[args] = result
         return result
+
     return check_args

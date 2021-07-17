@@ -22,4 +22,6 @@ from collections import Counter
 
 
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
-    return max(Counter(inp), key=Counter(inp).get), min(Counter(inp), key=Counter(inp).get)
+    return max(Counter(inp), key=Counter(inp).get), min(
+        Counter(inp), key=Counter(inp).get
+    )

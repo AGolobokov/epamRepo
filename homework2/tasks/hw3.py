@@ -18,7 +18,7 @@ import itertools
 from typing import List, Any
 
 
-def my_list_generator(temp_list:List[Any], value)->Any:
+def my_list_generator(temp_list: List[Any], value) -> Any:
     for elm in itertools.combinations(temp_list, value - 1):
         yield elm
 

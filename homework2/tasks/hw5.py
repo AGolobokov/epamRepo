@@ -18,7 +18,12 @@ assert = custom_range(string.ascii_lowercase, 'p', 'g', -2) == ['p', 'n', 'l', '
 from typing import List, Iterable, Any
 
 
-def range_function(iterable_seq: Iterable, start: Any = None, stop: Any = None, step: int = 1,) -> List[Any]:
+def range_function(
+    iterable_seq: Iterable,
+    start: Any = None,
+    stop: Any = None,
+    step: int = 1,
+) -> List[Any]:
     start, stop, step = start, stop, step
     temp_list = list(iterable_seq)
 
