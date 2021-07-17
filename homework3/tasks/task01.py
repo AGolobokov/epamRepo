@@ -11,12 +11,12 @@ def cache(times):
                 if value not in cache_list:
                     for i in range(0, times + 1):
                         cache_list.append(value)
-                # print(value)
+                # print(value) # use for example with print
                 cache_list.remove(value)
                 return value
             else:
                 temp_value = cache_list[0]
-                # print(temp_value)
+                # print(temp_value) # use for example with print
                 cache_list.remove(temp_value)
                 return temp_value
         return cache_wrapper

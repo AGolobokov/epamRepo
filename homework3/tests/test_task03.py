@@ -23,4 +23,5 @@ DATA_FOR_TEST = [
     ],
 )
 def test_positive_make_filter(arg, expected):
+    """Testing with different args"""
     assert make_filter(**arg).apply(DATA_FOR_TEST) == expected

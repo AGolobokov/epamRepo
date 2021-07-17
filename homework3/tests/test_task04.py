@@ -12,6 +12,7 @@ from homework3.tasks.task04 import is_armstrong
     ],
 )
 def test_positive_is_armstrong(arg, expected):
+    """Testing that 153, 407, 9 give True"""
     assert is_armstrong(arg) == expected, "Is Armstrong number"
 
 
@@ -24,4 +25,5 @@ def test_positive_is_armstrong(arg, expected):
     ],
 )
 def test_negative_is_armstrong(arg, expected):
+    """Testing that 10, 408, 154  give False"""
     assert is_armstrong(arg) == expected, "Is not Armstrong number"
