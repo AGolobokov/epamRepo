@@ -28,7 +28,6 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
         for element in line.split():
             if element not in unique_words:
                 unique_words.add((len(set(element)) + len(element), element))
-    # в след раз попробую уменьшить вложенность
     return [i[1] for i in sorted(unique_words)[:-11:-1]]
 
 
@@ -46,8 +45,8 @@ def count_punctuation_chars(file_path: str) -> int:
     result_counter = 0
     for line in extract_lines_form_file(file_path):
         for char in line:
-                if char in string.punctuation:
-                    result_counter += 1
+            if char in string.punctuation:
+                result_counter += 1
     return result_counter
 
 
