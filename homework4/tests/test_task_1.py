@@ -24,7 +24,7 @@ def test_file(param) -> str:
     ],
 )
 def test_reading_magic_number_positive_case(test_file, param, expected):
-    """Testing that temp_file with"""
+    """Testing that read_magic_number return True"""
     assert read_magic_number(test_file) is expected
 
 
@@ -37,7 +37,7 @@ def test_reading_magic_number_positive_case(test_file, param, expected):
     ],
 )
 def test_reading_magic_number_negative_case(test_file, param, expected):
-    """Testing that temp_file with"""
+    """Testing that read_magic_number return False"""
     assert read_magic_number(test_file) is expected
 
 
@@ -48,6 +48,7 @@ def test_reading_magic_number_negative_case(test_file, param, expected):
     ],
 )
 def test_reading_magic_number_throws_exception(test_file, param, expected):
+    """Testing that read_magic_number return exception ValueError"""
     result = False
     try:
         read_magic_number(test_file)
