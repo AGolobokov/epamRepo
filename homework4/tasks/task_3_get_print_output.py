@@ -22,6 +22,10 @@ You will learn:
  - how to test output to the stderr and stdout
 """
 
+import sys
+
+ELEMENT = "error"
+
 
 def my_precious_logger(text: str):
-    pass
+    sys.stderr.write(text) if text.find(ELEMENT) == 0 else sys.stdout.write(text)
