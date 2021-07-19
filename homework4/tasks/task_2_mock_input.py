@@ -47,4 +47,3 @@ def count_dots_on_i(url: str) -> int:
     for line in data:
         temp_list.append([1 if char == TARGET else 0 for char in line])
     return sum([item for sublist in temp_list for item in sublist])
-

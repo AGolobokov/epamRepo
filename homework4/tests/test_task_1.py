@@ -56,4 +56,3 @@ def test_reading_magic_number_throws_exception(test_file, param, expected):
         result = True
 
     assert result is True
-

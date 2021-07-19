@@ -21,22 +21,8 @@ Definition of done:
 from typing import List, Generator, Any
 
 
-def generate_fuzz_buzz(n: int):
-    value = ""
-    for i in range(1, n+1):
-        if i % 3 == 0 and i % 5 == 0:
-            value = "fuzz buzz"
-        elif i % 3 == 0:
-            value = "fuzz"
-        elif i % 5 == 0:
-            value = "buzz"
-        else:
-            value = i
-        yield str(value)
+def fizzbuzz(n: int) -> Generator[str]:
+    pass
 
 
-def fizzbuzz(n: int) -> Generator[None, None, str]:
-    generate_fuzz_buzz(n)
-    return generate_fuzz_buzz(n)
-
-
+# подумаю к следующему разу

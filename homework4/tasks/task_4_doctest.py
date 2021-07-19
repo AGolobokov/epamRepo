@@ -32,11 +32,19 @@ def fizzbuzz(n: int) -> List[str]:
     >>> fizzbuzz(15)
     [1, 2, 'fuzz', 4, 'buzz', 'fuzz', 7, 8, 'fuzz', 'buzz', 11, 'fuzz', 13, 14, 'fuzz buzz']
     """
-    result_list = ["fuzz buzz" if not i % 3 and not i % 5 else "fuzz" if not i % 3 else i if i % 5 else "buzz" for i in range(1, n + 1)]
+    result_list = [
+        "fuzz buzz"
+        if not i % 3 and not i % 5
+        else "fuzz"
+        if not i % 3
+        else i
+        if i % 5
+        else "buzz"
+        for i in range(1, n + 1)
+    ]
     return result_list
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     fizzbuzz(1)
     doctest.testmod(verbose=True)
-

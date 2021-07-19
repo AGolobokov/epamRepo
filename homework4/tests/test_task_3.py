@@ -14,5 +14,3 @@ def test_positive_my_precious_logger_with_or(capsys):
     my_precious_logger("OK")
     captured = capsys.readouterr()
     assert captured.out == "OK"
-
-
