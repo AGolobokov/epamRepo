@@ -29,7 +29,7 @@ HomeworkResult принимает объект автора задания, пр
 4.
 Teacher
 Атрибут:
-    homework_done - структура с интерфейсом как в словаря, сюда поподают все
+    homework_done - структура с интерфейсом как y словаря, сюда поподают все
     HomeworkResult после успешного прохождения check_homework
     (нужно гаранитровать остутствие повторяющихся результатов по каждому
     заданию), группировать по экземплярам Homework.
@@ -51,6 +51,80 @@ PEP8 соблюдать строго.
 """
 import datetime
 from collections import defaultdict
+
+
+class DeadlineError(Exception):
+    def __init__(self, error_text):
+        print(error_text)
+
+
+class IncorrectObjectError(Exception):
+    pass
+
+
+class HomeworkResult:
+
+    def __init__(self, author, homework, solution):
+        self.author = author
+        if type(homework) is Homework:
+            self.homework = homework
+        else:
+            raise IncorrectObjectError('You gave a not Homework object')
+        self.solution = str(solution)
+        self.created = datetime.datetime.today()
+
+
+class Person:
+
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+
+class Student(Person):
+
+    def do_homework(self, homework_object, answer):
+        if homework_object.is_active():
+            return HomeworkResult(self, homework_object, answer)
+        else:
+            raise DeadlineError("You are late")
+
+
+class Teacher(Person):
+
+    homework_done = defaultdict(list)
+
+    @staticmethod
+    def create_homework(text_of_task, days_for_complete):
+        class_instance = Homework(text_of_task, days_for_complete)
+        return class_instance
+
+    def check_homework(self, result_of_homework):
+        if len(result_of_homework.solution) > 5:
+            result_list = [(result_of_homework.homework, result_of_homework.solution)]
+            for key, value in result_list:
+                if value not in self.homework_done[key]:
+                    self.homework_done[key].append(value)
+            return True
+        return False
+
+    @classmethod
+    def reset_results(cls, exemplar=0):
+        if exemplar is None:
+            cls.homework_done.clear()
+        elif isinstance(exemplar, Homework):
+            del cls.homework_done[exemplar]
+
+
+class Homework:
+
+    def __init__(self, text, deadline):
+        self.text = text
+        self.deadline = datetime.timedelta(days=deadline)
+        self.created = datetime.datetime.today()
+
+    def is_active(self):
+        return self.created + self.deadline > datetime.datetime.today()
 
 
 if __name__ == '__main__':
@@ -82,3 +156,4 @@ if __name__ == '__main__':
 
     print(Teacher.homework_done[oop_hw])
     Teacher.reset_results()
+
