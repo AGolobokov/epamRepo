@@ -109,7 +109,7 @@ class Teacher(Person):
         return False
 
     @classmethod
-    def reset_results(cls, exemplar=0):
+    def reset_results(cls, exemplar=None):
         if exemplar is None:
             cls.homework_done.clear()
         elif isinstance(exemplar, Homework):
