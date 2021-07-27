@@ -63,26 +63,23 @@ class IncorrectObjectError(Exception):
 
 
 class HomeworkResult:
-
     def __init__(self, author, homework, solution):
         self.author = author
         if type(homework) is Homework:
             self.homework = homework
         else:
-            raise IncorrectObjectError('You gave a not Homework object')
+            raise IncorrectObjectError("You gave a not Homework object")
         self.solution = str(solution)
         self.created = datetime.datetime.today()
 
 
 class Person:
-
     def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
 
 
 class Student(Person):
-
     def do_homework(self, homework_object, answer):
         if homework_object.is_active():
             return HomeworkResult(self, homework_object, answer)
@@ -117,7 +114,6 @@ class Teacher(Person):
 
 
 class Homework:
-
     def __init__(self, text, deadline):
         self.text = text
         self.deadline = datetime.timedelta(days=deadline)
@@ -127,23 +123,23 @@ class Homework:
         return self.created + self.deadline > datetime.datetime.today()
 
 
-if __name__ == '__main__':
-    opp_teacher = Teacher('Daniil', 'Shadrin')
-    advanced_python_teacher = Teacher('Aleksandr', 'Smetanin')
+if __name__ == "__main__":
+    opp_teacher = Teacher("Daniil", "Shadrin")
+    advanced_python_teacher = Teacher("Aleksandr", "Smetanin")
 
-    lazy_student = Student('Roman', 'Petrov')
-    good_student = Student('Lev', 'Sokolov')
+    lazy_student = Student("Roman", "Petrov")
+    good_student = Student("Lev", "Sokolov")
 
-    oop_hw = opp_teacher.create_homework('Learn OOP', 1)
-    docs_hw = opp_teacher.create_homework('Read docs', 5)
+    oop_hw = opp_teacher.create_homework("Learn OOP", 1)
+    docs_hw = opp_teacher.create_homework("Read docs", 5)
 
-    result_1 = good_student.do_homework(oop_hw, 'I have done this hw')
-    result_2 = good_student.do_homework(docs_hw, 'I have done this hw too')
-    result_3 = lazy_student.do_homework(docs_hw, 'done')
+    result_1 = good_student.do_homework(oop_hw, "I have done this hw")
+    result_2 = good_student.do_homework(docs_hw, "I have done this hw too")
+    result_3 = lazy_student.do_homework(docs_hw, "done")
     try:
         result_4 = HomeworkResult(good_student, "fff", "Solution")
     except Exception:
-        print('There was an exception here')
+        print("There was an exception here")
     opp_teacher.check_homework(result_1)
     temp_1 = opp_teacher.homework_done
 
@@ -156,4 +152,3 @@ if __name__ == '__main__':
 
     print(Teacher.homework_done[oop_hw])
     Teacher.reset_results()
-

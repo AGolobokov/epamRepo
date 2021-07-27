@@ -16,7 +16,7 @@ def instances_counter(cls):
     class NewCls:
 
         counter = 0
-        setattr(cls, 'counter', counter)
+        setattr(cls, "counter", counter)
 
         def __init__(self, *args, **kwargs):
             self._obj = cls(*args, **kwargs)
@@ -26,7 +26,7 @@ def instances_counter(cls):
         def get_created_instances(*args):
             return cls.counter
 
-        setattr(cls, 'get_created_instances', get_created_instances)
+        setattr(cls, "get_created_instances", get_created_instances)
 
         @staticmethod
         def reset_instances_counter(*args):
@@ -34,7 +34,7 @@ def instances_counter(cls):
             cls.counter = 0
             return temp_value
 
-        setattr(cls, 'reset_instances_counter', reset_instances_counter)
+        setattr(cls, "reset_instances_counter", reset_instances_counter)
 
     return NewCls
 
@@ -44,7 +44,7 @@ class User:
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     User.get_created_instances()  # 0
     user, _, _ = User(), User(), User()
