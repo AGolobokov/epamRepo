@@ -9,7 +9,7 @@ from homework7.tasks.hw2 import backspace_compare
         ("1aab##c", "1a2e##c", True),
         ("#######", "#######", True),
         ("a#c", "b", False),
-        ("123#567", "234#567", False)
+        ("123#567", "234#567", False),
     ],
 )
 def test_backspace_compare(arg1, arg2, expected):

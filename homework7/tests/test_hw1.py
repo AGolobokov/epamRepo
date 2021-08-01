@@ -14,12 +14,11 @@ EXAMPLE_TREE = {
             "key1": "value1",
             "key2": "RED",
             "key3": ["a", "lot", "of", "values", {"nested_key": "RED"}],
-        }
-     },
+        },
+    },
     "fourth": "RED",
     "1": ["simple", "list", "of", "RED", "valued", "1", 1, True, "True"],
     True: (1, 2, 3, 4, "10"),
-
 }
 
 

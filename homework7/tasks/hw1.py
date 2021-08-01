@@ -21,8 +21,8 @@ example_tree = {
             "key1": "value1",
             "key2": "RED",
             "key3": ["a", "lot", "of", "values", {"nested_key": "RED"}],
-        }
-     },
+        },
+    },
     "fourth": "RED",
 }
 
@@ -88,6 +88,7 @@ def find_occurrences(tree: dict, element: Any) -> int:
                 else:
                     if target == obj:
                         counter += 1
+
     # walk on the tree
     for elm in tree:
         # checking keys in three
@@ -106,7 +107,12 @@ def find_occurrences(tree: dict, element: Any) -> int:
         # checking branch in three
         if tree[elm] == element:
             counter += 1
-        elif isinstance(tree[elm], list) or isinstance(tree[elm], tuple) or isinstance(tree[elm], dict) or isinstance(tree[elm], set):
+        elif (
+            isinstance(tree[elm], list)
+            or isinstance(tree[elm], tuple)
+            or isinstance(tree[elm], dict)
+            or isinstance(tree[elm], set)
+        ):
             recursive_traversal(tree[elm], element)
         else:
             if isinstance(tree[elm], str):
@@ -121,5 +127,5 @@ def find_occurrences(tree: dict, element: Any) -> int:
     return counter
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(find_occurrences(example_tree, "RED"))  # 6
