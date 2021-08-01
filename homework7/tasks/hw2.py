@@ -28,7 +28,8 @@ TARGET = '#'
 def processing_string(data: str) -> list:
     """
     Delete from input string backspace characters and them target characters.
-    return list
+    :param data:
+    :return:
     """
     create_list = list()
     step = -1
@@ -39,17 +40,18 @@ def processing_string(data: str) -> list:
             if not skip_element_flag:
                 create_list.append(i)
             else:
-                skip_element_flag = 0
+                skip_element_flag -= 1
         else:
-            skip_element_flag = 1
+            skip_element_flag += 1
     return create_list
 
 
 def backspace_compare(first: str, second: str):
     """
     Compare two strings.
-    return True, if processing strings equal
-    return False, if processing strings are not equal
+    :param first:
+    :param second:
+    :return: True, if processing strings equal, else False
     """
     result = True
 
@@ -62,3 +64,5 @@ def backspace_compare(first: str, second: str):
                 result = False
                 return result
     return result
+
+
