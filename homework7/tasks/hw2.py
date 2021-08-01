@@ -21,8 +21,15 @@ Examples:
 
 TARGET = '#'
 
+# пытался сразу перебирать в zip две строки, но застрял на кейсе когда строки одинаковые, но в одной много # и тогда,
+# так как идем с одинаковым шагом, все идет коту под хвост, пробовал шаг на лету менять но это какая то шляпа)
+
 
 def processing_string(data: str) -> list:
+    """
+    Delete from input string backspace characters and them target characters.
+    return list
+    """
     create_list = list()
     step = -1
     skip_element_flag = 0
@@ -39,6 +46,11 @@ def processing_string(data: str) -> list:
 
 
 def backspace_compare(first: str, second: str):
+    """
+    Compare two strings.
+    return True, if processing strings equal
+    return False, if processing strings are not equal
+    """
     result = True
 
     if len(processing_string(first)) != len(processing_string(second)):
