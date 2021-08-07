@@ -1,4 +1,3 @@
-
 class KeyValueStorage:
 
     class_dict = dict()

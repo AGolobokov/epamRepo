@@ -18,9 +18,9 @@ def test_KeyValueStorage(test_file):
 
     exemplar_key_value_storage = KeyValueStorage(test_file)
 
-    assert exemplar_key_value_storage.last_name == 'top'
-    assert exemplar_key_value_storage.name == 'kek'
+    assert exemplar_key_value_storage.last_name == "top"
+    assert exemplar_key_value_storage.name == "kek"
     assert exemplar_key_value_storage.power == 9001
-    assert exemplar_key_value_storage.song == 'shadilay'
-    assert exemplar_key_value_storage['name'] == 'kek'
-    assert exemplar_key_value_storage['power'] == 9001
+    assert exemplar_key_value_storage.song == "shadilay"
+    assert exemplar_key_value_storage["name"] == "kek"
+    assert exemplar_key_value_storage["power"] == 9001
