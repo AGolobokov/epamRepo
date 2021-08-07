@@ -3,7 +3,6 @@ import struct
 import random
 import hashlib
 
-
 from multiprocessing import Pool
 
 
@@ -15,5 +14,5 @@ def slow_calculate(value):
 
 
 if __name__ == "__main__":
-    with Pool(32) as p:
+    with Pool(48) as p:
         answer = sum(p.map(slow_calculate, range(0, 500)))

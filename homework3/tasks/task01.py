@@ -2,7 +2,7 @@ def cache(times):
     cache_list = list()
 
     def cache_decorator(function):
-        def cache_wrapper(*args):
+        def cache_wrapper(*args, **kwargs):
             value = 0
             if not cache_list:
                 value = function(*args)
