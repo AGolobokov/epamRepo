@@ -14,13 +14,18 @@ def instances_counter(cls):
     """Some code"""
 
     class NewCls:
-
+        """Wrapper class for add get_created_instances and reset_instances_counter methods"""
         counter = 0
         setattr(cls, "counter", counter)
 
         def __init__(self, *args, **kwargs):
             self._obj = cls(*args, **kwargs)
             cls.counter += 1
+
+        def __class__(self):
+            # return type.__class__(self._obj)
+            print(type(cls()))
+            return type(cls())
 
         @staticmethod
         def get_created_instances(*args):
@@ -36,6 +41,7 @@ def instances_counter(cls):
 
         setattr(cls, "reset_instances_counter", reset_instances_counter)
 
+    setattr(NewCls, '__name__', cls.__name__)
     return NewCls
 
 
