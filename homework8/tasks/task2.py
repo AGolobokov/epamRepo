@@ -36,6 +36,8 @@ class TableData:
         self.cursor.execute(f"SELECT * FROM {self.table_name}")
         for row in self.cursor:
             if key in row:
+                self.cursor.close()
+                self.connection_db.close()
                 return row
         self.cursor.close()
         self.connection_db.close()
@@ -54,6 +56,8 @@ class TableData:
         self.cursor.execute(f"SELECT * FROM {self.table_name}")
         for row in self.cursor:
             counter += 1
+        self.cursor.close()
+        self.connection_db.close()
         return counter
 
     def __contains__(self, element):
@@ -62,6 +66,8 @@ class TableData:
         self.cursor.execute(f"SELECT * FROM {self.table_name}")
         for row in self.cursor:
             if element in row:
+                self.cursor.close()
+                self.connection_db.close()
                 return True
         self.cursor.close()
         self.connection_db.close()
@@ -78,6 +84,8 @@ class TableData:
             self.cursor.execute(f"SELECT * FROM {self.table_name}")
         if self.start >= self.stop:
             self.start = 0
+            self.cursor.close()
+            self.connection_db.close()
             raise StopIteration
         db_line = self.cursor.fetchone()
         local_count = 0
