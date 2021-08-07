@@ -19,7 +19,7 @@ def test_file(param) -> str:
     "param, expected",
     [
         ("1", True),
-        ("3", True),
+        ("1.5", True),
         ("2.9", True),
     ],
 )

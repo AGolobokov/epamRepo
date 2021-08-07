@@ -34,8 +34,8 @@ import os.path
 def extract_line_form_file(file_path: str) -> str:
     if os.path.isfile(file_path):
         with open(file_path) as file:
-            for line in file:
-                return line
+            line = file.readline()
+            return line
 
 
 def read_magic_number(path: str) -> bool:
