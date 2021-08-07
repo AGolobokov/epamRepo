@@ -17,7 +17,7 @@ def test_file() -> str:
             "After 1912, the Republican Party began to undergo an ideological shift to the right.\n "
             "Following the Civil Rights Act of 1964 and the Voting Rights Act of 1965,\n "
             "the party's core base shifted, with southern states becoming \n"
-            "more reliably Republican in presidential politics."
+            "more reliably Republican in \\u00dc presidential politics."
         )
     return temp_file
 

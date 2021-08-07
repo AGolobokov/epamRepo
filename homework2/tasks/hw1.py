@@ -7,18 +7,14 @@ Given a file containing text. Complete using only default collections:
     5) Find most common non ascii char for document
 """
 from typing import List
-import string
-from collections import Counter
+import unicodedata2 as unicodedata
 
 
 def extract_lines_form_file(file_path: str) -> any:
-    with open(file_path) as file:
+    with open(file_path, "r", encoding="utf8") as file:
         for line in file:
-            yield line
-
-
-def string_escape(s):
-    return s.encode().decode("unicode-escape")
+            prepared_line = line.encode().decode("unicode-escape")
+            yield prepared_line
 
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
@@ -32,20 +28,23 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
 
 
 def get_rarest_char(file_path: str) -> str:
-    collection_char = Counter()
+    collection_char_dict = dict()
 
     for line in extract_lines_form_file(file_path):
-        temp_dict = Counter(list(string_escape(line)))
-        collection_char += temp_dict
-    if collection_char:
-        return min(collection_char, key=collection_char.get)
+        for elm in list(line):
+            if elm in collection_char_dict:
+                collection_char_dict[elm] += 1
+            else:
+                collection_char_dict[elm] = 1
+    if collection_char_dict:
+        return min(collection_char_dict, key=collection_char_dict.get)
 
 
 def count_punctuation_chars(file_path: str) -> int:
     result_counter = 0
     for line in extract_lines_form_file(file_path):
         for char in line:
-            if char in string.punctuation:
+            if unicodedata.category(char).startswith("P"):
                 result_counter += 1
     return result_counter
 
@@ -54,18 +53,20 @@ def count_non_ascii_chars(file_path: str) -> int:
     result_counter = 0
 
     for line in extract_lines_form_file(file_path):
-        for elm in list(string_escape(line)):
+        for elm in list(line):
             if not elm.isascii():
                 result_counter += 1
     return result_counter
 
 
 def get_most_common_non_ascii_char(file_path: str) -> str:
-    collection_non_ascii_char = Counter()
+    collection_non_ascii_char = dict()
 
     for line in extract_lines_form_file(file_path):
-        temp_list = [elm for elm in list(string_escape(line)) if not elm.isascii()]
-        temp_dict = Counter(temp_list)
-        collection_non_ascii_char += temp_dict
+        for elm in [elm for elm in list(line) if not elm.isascii()]:
+            if elm in collection_non_ascii_char:
+                collection_non_ascii_char[elm] += 1
+            else:
+                collection_non_ascii_char[elm] = 1
     if collection_non_ascii_char:
         return max(collection_non_ascii_char, key=collection_non_ascii_char.get)
