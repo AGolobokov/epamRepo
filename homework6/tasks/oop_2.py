@@ -51,15 +51,12 @@ PEP8 соблюдать строго.
 """
 import datetime
 from collections import defaultdict
+from dataclasses import dataclass
 
 
 class DeadlineError(Exception):
     def __init__(self, error_text):
         print(error_text)
-
-
-class IncorrectObjectError(Exception):
-    pass
 
 
 class HomeworkResult:
@@ -68,15 +65,15 @@ class HomeworkResult:
         if type(homework) is Homework:
             self.homework = homework
         else:
-            raise IncorrectObjectError("You gave a not Homework object")
-        self.solution = str(solution)
+            raise TypeError("You gave a not Homework object")
+        self.solution = solution
         self.created = datetime.datetime.today()
 
 
+@dataclass
 class Person:
-    def __init__(self, first_name, last_name):
-        self.first_name = first_name
-        self.last_name = last_name
+    first_name: str
+    last_name: str
 
 
 class Student(Person):
@@ -98,10 +95,8 @@ class Teacher(Person):
 
     def check_homework(self, result_of_homework):
         if len(result_of_homework.solution) > 5:
-            result_list = [(result_of_homework.homework, result_of_homework.solution)]
-            for key, value in result_list:
-                if value not in self.homework_done[key]:
-                    self.homework_done[key].append(value)
+            if result_of_homework.solution not in self.homework_done[result_of_homework.homework]:
+                self.homework_done[result_of_homework.homework].append(result_of_homework.solution)
             return True
         return False
 

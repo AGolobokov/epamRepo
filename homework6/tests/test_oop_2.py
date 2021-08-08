@@ -8,7 +8,6 @@ from homework6.tasks.oop_2 import (
     HomeworkResult,
     Person,
     DeadlineError,
-    IncorrectObjectError,
 )
 
 
@@ -145,7 +144,7 @@ class TestHomeworkResult(unittest.TestCase):
         self.assertEqual(self.homework_active_result.author, self.student_example)
         self.assertEqual(self.homework_active_result.solution, "solution")
         self.assertRaises(
-            IncorrectObjectError,
+            TypeError,
             HomeworkResult,
             self.student_example,
             "fff",
