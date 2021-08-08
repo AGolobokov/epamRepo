@@ -5,7 +5,7 @@ from homework7.tasks.hw1 import find_occurrences
 EXAMPLE_TREE = {
     "first": ["RED", "BLUE"],
     "second": {
-        "simple_key": ["simple", "list", True, "of", "RED", "valued", "1", 1],
+        "simple_key": ["simple", "list", True, "True", "RED", "valued", "1", 1],
     },
     "third": {
         "abc": "BLUE",
@@ -19,6 +19,7 @@ EXAMPLE_TREE = {
     "fourth": "RED",
     "1": ["simple", "list", "of", "RED", "valued", "1", 1, True, "True"],
     True: (1, 2, 3, 4, "10"),
+    "True": ["A", "B", "C", "D", "True", ],
 }
 
 
@@ -32,6 +33,7 @@ EXAMPLE_TREE = {
         (EXAMPLE_TREE, 1, 3),
         (EXAMPLE_TREE, ["RED", "BLUE"], 1),
         (EXAMPLE_TREE, ["a", "lot", "of", "values", {"nested_key": "RED"}], 1),
+        (EXAMPLE_TREE, "True", 4)
     ],
 )
 def test_find_occurrences(arg1, arg2, expected):
