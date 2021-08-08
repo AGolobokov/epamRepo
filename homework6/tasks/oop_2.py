@@ -95,8 +95,13 @@ class Teacher(Person):
 
     def check_homework(self, result_of_homework):
         if len(result_of_homework.solution) > 5:
-            if result_of_homework.solution not in self.homework_done[result_of_homework.homework]:
-                self.homework_done[result_of_homework.homework].append(result_of_homework.solution)
+            if (
+                result_of_homework.solution
+                not in self.homework_done[result_of_homework.homework]
+            ):
+                self.homework_done[result_of_homework.homework].append(
+                    result_of_homework.solution
+                )
             return True
         return False
 

@@ -15,6 +15,7 @@ def instances_counter(cls):
 
     class NewCls:
         """Wrapper class for add get_created_instances and reset_instances_counter methods"""
+
         counter = 0
         setattr(cls, "counter", counter)
 
@@ -41,7 +42,7 @@ def instances_counter(cls):
 
         setattr(cls, "reset_instances_counter", reset_instances_counter)
 
-    setattr(NewCls, '__name__', cls.__name__)
+    setattr(NewCls, "__name__", cls.__name__)
     return NewCls
 
 
