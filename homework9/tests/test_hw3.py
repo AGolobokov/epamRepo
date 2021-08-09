@@ -8,7 +8,7 @@ import os
     "extension, tokenizer, expected",
     [
         ("txt", None, 10),
-        ("txt", str.split, 15),
+        ("txt", str.split('.'), 15),
     ],
 )
 def test_reading_magic_number_positive_case(extension, tokenizer, expected):
