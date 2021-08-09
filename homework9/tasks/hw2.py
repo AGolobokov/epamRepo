@@ -18,10 +18,10 @@ class SupressorClass:
         self.error = error
 
     def __enter__(self):
-        print('__enter__')
+        print("__enter__")
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        print('__exit__')
+        print("__exit__")
         return isinstance(exc_value, self.error)
 
 
@@ -44,5 +44,3 @@ if __name__ == "__main__":
 
     with supressor_generator(AssertionError):
         raise AssertionError
-
-

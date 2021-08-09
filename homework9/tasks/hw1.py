@@ -19,7 +19,7 @@ from typing import List, Union, Iterator
 
 
 def get_from_file(file_name):
-    with open(file_name, 'r') as file:
+    with open(file_name, "r") as file:
         for line in file:
             prepare_line = line.strip()
             yield prepare_line

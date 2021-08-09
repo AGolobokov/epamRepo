@@ -18,7 +18,7 @@ def test_file(param, file_list) -> list:
 @pytest.mark.parametrize(
     "param, file_list, expected",
     [
-        (['1\n10\n100\n', '2\n20\n200\n'], ['0','1'], [1, 2, 10, 20, 100, 200]),
+        (["1\n10\n100\n", "2\n20\n200\n"], ["0", "1"], [1, 2, 10, 20, 100, 200]),
     ],
 )
 def test_reading_magic_number_positive_case(test_file, file_list, param, expected):
