@@ -3,6 +3,9 @@ import requests
 import datetime
 import operator
 import json
+import time
+
+from multiprocessing import Pool
 
 # get central bank valute data
 now = datetime.datetime.now()
@@ -69,7 +72,8 @@ for elm in num_of_pages:
 
 
 # get data of company
-for i in range(min(page_num_list), max(page_num_list) + 1):
+def walk_on_the_page(page_num):
+# for i in range(min(page_num_list), max(page_num_list) + 1):
     # get data from main page
     print(f"page number {i}")
     company_name_dict = dict()
@@ -113,6 +117,11 @@ for i in range(min(page_num_list), max(page_num_list) + 1):
         potential_profit = round((float(clean_high_week) - float(clean_low_week))/float(clean_low_week)*100, 2)
         new_company = Company(key, take_ticker,  price, company_name_dict[key][1], clean_pe_data, potential_profit)
         company_list.append(new_company)
+
+
+if __name__ == "main":
+    with Pool(48) as p:
+        answer = sum(p.map(walk_on_the_page, range(min(page_num_list), max(page_num_list) + 1)))
 
 
 company_list.sort(key=operator.attrgetter('price'))
@@ -161,6 +170,7 @@ with open('top_25_week_profit.json', 'w') as outfile:
         print(counter, i)
         counter += 1
         json.dump(i.toJSON(), outfile)
+
 
 
 
