@@ -3,6 +3,7 @@ import requests
 import datetime
 import operator
 import json
+import time
 
 from multiprocessing import Manager, Process
 
@@ -49,7 +50,6 @@ def walk_on_the_page(page_num):
         clean_year_profit = float(year_profit.replace("%", ""))
         link = data.find('td', class_='table__td table__td--big').a.get('href')
         company_name_dict[name.strip()] = [link.strip(), clean_year_profit]
-    print(company_name_dict)
 
     # get data from company page
     for key in company_name_dict:
@@ -87,8 +87,8 @@ def worker(n, any_list):
 
 if __name__ == "__main__":
 
-    t_start = datetime.datetime.now()
-    print(t_start)
+    start_time = time.time()
+    print(start_time)
 
     # get central bank valute data
     now = datetime.datetime.now()
@@ -185,25 +185,6 @@ if __name__ == "__main__":
             counter += 1
             json.dump(i.toJSON(), outfile)
 
-    t_stop = datetime.datetime.now()
-    t_delta = t_start - t_stop
+    result_time = time.time() - start_time
 
-    print("Time of execution = ", t_delta)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print("Time of execution = ", result_time)
