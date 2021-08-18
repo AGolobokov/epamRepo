@@ -29,6 +29,7 @@ order_2 = Order(100, elder_discount)
 assert order_1.final_price() == 10
 """
 
+
 class Order:
 
     morning_discount = 0.25

@@ -14,6 +14,3 @@ def test_morning_discount():
 def test_elder_discount():
     order_2 = Order(100, elder_discount)
     assert order_2.final_price() == 10
-
-
-

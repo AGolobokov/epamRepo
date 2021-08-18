@@ -49,14 +49,3 @@ class SimplifiedEnum(type):
         for name in namespace[f"_{name}__keys"]:
             namespace[name] = name
         return super(SimplifiedEnum, cls).__new__(cls, name, bases, namespace)
-
-
-
-
-
-
-
-
-
-
-
