@@ -137,7 +137,13 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+<<<<<<< HEAD
 # My ignore 
 .git/
 .idea/
 
+=======
+# add to gitignore .git and .idea
+.git/ 
+.idea/
+>>>>>>> b9df88a0c697293e2224d315177bc0891d997ad6
