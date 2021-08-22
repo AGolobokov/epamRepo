@@ -5,7 +5,7 @@ import operator
 import json
 import time
 
-from multiprocessing import Manager, Process
+from multiprocessing import Pool
 
 
 class Company:
@@ -19,7 +19,7 @@ class Company:
     def __init__(self, name, ticker, price, one_year_gain, pe_ratio, potential_52_week_profit):
         self.name = name
         self.ticker = ticker
-        self.price = round(73 * float(price), 2)
+        self.price = price
         self.one_year_gain = one_year_gain
         self.pe_ratio = pe_ratio
         self.potential_52_week_profit = potential_52_week_profit
@@ -34,11 +34,11 @@ class Company:
 # get data of company
 def walk_on_the_page(page_num):
     company_list = list()
-    # for i in range(min(page_num_list), max(page_num_list) + 1):
+
     # get data from main page
     print(f"Processing page number {page_num}")
     company_name_dict = dict()
-    html_text_page = requests.get(f'https://markets.businessinsider.com/index/components/s&p_500?p={page_num}',timeout=5).text
+    html_text_page = requests.get(f'https://markets.businessinsider.com/index/components/s&p_500?p={page_num}', timeout=5).text
 
     content_from_page = BeautifulSoup(html_text_page, "html.parser")
     table_data = content_from_page.find('table', {'class': 'table table__layout--fixed'})
@@ -59,7 +59,8 @@ def walk_on_the_page(page_num):
         company_page_soup = BeautifulSoup(html_text_page, "html.parser")
 
         price = company_page_soup.find('span', class_='price-section__current-value').text
-        price = float(price.replace(",", ""))
+        price = round(float(price.replace(",", "")) * one_dollar, 2)
+
         take_ticker = str(company_page_soup.title.text).split()[0].strip()
         pe_data_heap = company_page_soup.find_all('div', class_='snapshot__data-item')
         pe_data = None
@@ -81,15 +82,7 @@ def walk_on_the_page(page_num):
     return company_list
 
 
-def worker(n, any_list):
-    any_list.append(walk_on_the_page(n))
-
-
-if __name__ == "__main__":
-
-    start_time = time.time()
-    print(start_time)
-
+def find_dollar_price()->float:
     # get central bank valute data
     now = datetime.datetime.now()
     day = now.day
@@ -111,6 +104,19 @@ if __name__ == "__main__":
             one_dollar_price = elm.find('value').text
             one_dollar_price = float(one_dollar_price.replace(",", "."))
 
+    return one_dollar_price
+
+
+one_dollar = 0
+
+
+if __name__ == "__main__":
+
+    start_time = time.time()
+    print(start_time)
+
+    one_dollar = find_dollar_price()
+
     url = 'https://markets.businessinsider.com/index/components/s&p_500'
 
     company_list = list()
@@ -127,19 +133,11 @@ if __name__ == "__main__":
         if str(page_num).isdigit():
             page_num_list.append(int(page_num))
 
-    manager = Manager()
-    return_list = manager.list()
-    process_work = []
+    with Pool(48) as p:
+        company_list.append(p.map(walk_on_the_page, range(min(page_num_list), max(page_num_list))))
 
-    for number in range(1, 12):
-        proc = Process(target=worker, args=(number, return_list))
-        process_work.append(proc)
-        proc.start()
-
-    for proc in process_work:
-        proc.join()
-
-    company_list = [elm for subarray in return_list for elm in subarray]
+    company_list = [elm for subarray in company_list for elm in subarray]
+    company_list = [elm for subarray in company_list for elm in subarray]
 
     company_list.sort(key=operator.attrgetter('price'))
     top_price_list = company_list[len(company_list) - 10:]
