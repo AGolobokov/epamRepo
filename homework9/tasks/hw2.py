@@ -18,10 +18,9 @@ class SupressorClass:
         self.error = error
 
     def __enter__(self):
-        print("__enter__")
+        pass
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        print("__exit__")
         return isinstance(exc_value, self.error)
 
 
