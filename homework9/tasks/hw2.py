@@ -7,6 +7,8 @@ Do it both ways: as a class and as a generator.
 
 """
 import contextlib
+import logging
+logger = logging.getLogger(__name__)
 
 
 class SupressorClass:
@@ -18,6 +20,7 @@ class SupressorClass:
         self.error = error
 
     def __enter__(self):
+        logger.info("This method is executed")
         pass
 
     def __exit__(self, exc_type, exc_value, exc_traceback):

@@ -32,5 +32,4 @@ def merge_sorted_files(file_list: List[Union[Path, str]]) -> Iterator:
         for data in get_from_file(fname):
             data_list.append(int(data))
 
-    for num in sorted(data_list):
-        yield num
+    yield from sorted(data_list)
