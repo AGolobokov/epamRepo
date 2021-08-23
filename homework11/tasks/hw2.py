@@ -44,17 +44,20 @@ class Order:
         return self.price - self.price * self.morning_discount
 
 
-def morning_discount(order):
+def discount_on_the_morning(order):
 
     return order.price * 0.5
 
 
-def elder_discount(order):
+def discounts_for_the_elderly(order):
 
     return order.price * 0.9
 
 
 if __name__ == "__main__":
 
-    order_1 = Order(100, morning_discount)
+    order_1 = Order(100, discount_on_the_morning)
     assert order_1.final_price() == 50
+
+    order_2 = Order(100, discounts_for_the_elderly)
+    assert order_2.final_price() == 10
